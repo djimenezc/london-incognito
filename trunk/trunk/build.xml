@@ -16,11 +16,11 @@
    specific language governing permissions and limitations
    under the License.    
 -->
-<project name="london-incognito" default="deploy-local">
+<project name="london-incognito" default="local-deploy">
 
 	<property file="build.${user.name}.properties" />
 
-	<target name="undeploy-local">
+	<target name="local-undeploy">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -36,7 +36,7 @@
 		<delete dir="${local.deploy.dir}" />
 	</target>
 
-	<target name="undeploy-remote">
+	<target name="remote-undeploy">
 
 		<ftp action="del"
 		     server="${deploy.ftp.url}"
@@ -63,7 +63,7 @@
 
 	</target>
 
-	<target name="create-folder-remote">
+	<target name="remote-create-folder">
 		<ftp action="mkdir"
 		     server="${deploy.ftp.url}"
 		     userid="${deploy.ftp.user}"
@@ -73,12 +73,12 @@
 		</ftp>
 	</target>
 
-	<target name="deploy-clean-remote"
-	        depends="undeploy-remote,create-folder-remote,deploy-remote"
+	<target name="remote-deploy-clean"
+	        depends="remote-undeploy,remote-create-folder,remote-deploy"
 	        description="">
 	</target>
 
-	<target name="deploy-remote" depends="" description="">
+	<target name="remote-deploy" depends="" description="">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -174,7 +174,7 @@
 		</ftp>
 	</target>
 
-	<target name="deploy-local" depends="undeploy-local" description="">
+	<target name="local-deploy" depends="local-undeploy" description="">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -233,7 +233,7 @@
 	</target>
 
 
-	<target name="backup-bbdd-local">
+	<target name="local-bbdd-backup">
 		<exec executable="${scripts.mysqldump}">
 			<arg value="${local.bbdd.name}" />
 			<arg value="${local.bbdd.backupFile.path}" />
@@ -243,7 +243,12 @@
 
 	</target>
 
-	<target name="deploy-bbdd-local">
+	<target name="local-bbdd-replace-backup">
+		<move tofile="${local.bbdd.deployFile.path}"
+				      file="${local.bbdd.backupFile.path}" />
+		
+	</target>
+	<target name="local-bbdd-deploy">
 
 		<sql driver="${local.bbdd.driver}"
 		     url="${local.bbdd.url}"
@@ -254,7 +259,7 @@
 
 	</target>
 
-	<target name="deploy-bbdd-remote">
+	<target name="remote-deploy-bbdd">
 
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
