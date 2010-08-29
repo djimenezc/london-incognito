@@ -56,14 +56,15 @@
 		     remotedir="${deploy.ftp.root.dir}"
 		     verbose="true">
 			<fileset>
-				<include name="mnemea/**/*" />
-				<include name="mnemea" />
+				<include name="${deploy.ftp.remote.folder}/**/*" />
+				<include name="${deploy.ftp.remote.folder}" />
 			</fileset>
 		</ftp>
 
 	</target>
 
 	<target name="remote-create-folder">
+		
 		<ftp action="mkdir"
 		     server="${deploy.ftp.url}"
 		     userid="${deploy.ftp.user}"
