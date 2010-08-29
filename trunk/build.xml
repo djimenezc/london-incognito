@@ -227,8 +227,14 @@
 			<dirset dir="${local.deploy.sites.dir}/default/files">
 			</dirset>
 		</chmod>
+		
 		<move tofile="${local.deploy.sites.dir}/default/settings.php"
 		      file="${local.deploy.sites.dir}/default/settings.local.php" />
+		
+		<chgrp type="both" group="www-data">
+			<fileset dir="${local.deploy.dir}" includes="**"/>
+			 <fileset dir="${local.deploy.dir}" includes="**/*"/>
+		</chgrp>
 
 	</target>
 
