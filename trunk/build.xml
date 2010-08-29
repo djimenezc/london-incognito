@@ -220,7 +220,7 @@
 			</fileset>
 		</copy>
 
-	<!--	<copy todir="${local.deploy.modules.dir}">
+		<copy todir="${local.deploy.modules.dir}">
 			<fileset dir="${modules.dir}">
 				<include name="**/*.*" />
 				<include name=".svn" />
@@ -232,7 +232,7 @@
 				<include name="**/*.*" />
 				<include name=".svn" />
 			</fileset>
-		</copy>-->
+		</copy>
 
 		<move tofile="${local.deploy.sites.dir}/default/settings.php"
 		      file="${local.deploy.sites.dir}/default/settings.local.php"
