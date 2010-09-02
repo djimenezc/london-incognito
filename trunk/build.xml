@@ -64,7 +64,7 @@
 	</target>
 
 	<target name="remote-create-folder">
-		
+
 		<ftp action="mkdir"
 		     server="${deploy.ftp.url}"
 		     userid="${deploy.ftp.user}"
@@ -102,9 +102,8 @@
 				<include name="**/*.*" />
 				<exclude name=".svn" />
 			</fileset>
-
 		</ftp>
-
+		
 		<ftp server="${deploy.ftp.url}"
 		     remotedir="${deploy.ftp.remote.dir}/sites"
 		     userid="${deploy.ftp.user}"
@@ -228,13 +227,13 @@
 			<dirset dir="${local.deploy.sites.dir}/default/files">
 			</dirset>
 		</chmod>
-		
+
 		<move tofile="${local.deploy.sites.dir}/default/settings.php"
 		      file="${local.deploy.sites.dir}/default/settings.local.php" />
-		
+
 		<chgrp type="both" group="www-data">
-			<fileset dir="${local.deploy.dir}" includes="**"/>
-			 <fileset dir="${local.deploy.dir}" includes="**/*"/>
+			<fileset dir="${local.deploy.dir}" includes="**" />
+			<fileset dir="${local.deploy.dir}" includes="**/*" />
 		</chgrp>
 
 	</target>
@@ -252,8 +251,8 @@
 
 	<target name="local-bbdd-replace-backup">
 		<move tofile="${local.bbdd.deployFile.path}"
-				      file="${local.bbdd.backupFile.path}" />
-		
+		      file="${local.bbdd.backupFile.path}" />
+
 	</target>
 	<target name="local-bbdd-deploy">
 

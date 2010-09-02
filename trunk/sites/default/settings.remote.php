@@ -89,7 +89,7 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysqli://djimenez:mysql1@SQL09.FREEMYSQL.NET/london';
+$db_url = 'mysqli://dbo339815123:london12@db335.1and1.es/db339815123';
 $db_prefix = '';
 
 /**
