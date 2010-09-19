@@ -1,0 +1,726 @@
+@CHARSET "UTF-8";
+html {
+    background-color: #e1e1e1;
+    background: url(../images/bg-body.jpg) repeat left top;
+}
+
+body {
+    font-family: Times, "Times New Roman", "Liberation Serif", FreeSerif, serif;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+a {
+    color: #000;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 1.4em;
+    margin: 2px 0 8px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin: 2px 0 8px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.1em;
+    margin: 2px 0 8px;
+    font-weight: bold;
+}
+
+h4, h5, h6 {
+    font-size: 1em;
+    margin: 2px 0 8px;
+    font-weight: bold;
+}
+
+#intro {
+    text-align: center;
+    padding-top: 20px;
+}
+
+#intro p {
+    padding-bottom: 20px;
+    font-size: 1.4em;
+}
+
+#container {
+    background: url(../images/bg-body.jpg) repeat left top;
+}
+
+#page {
+    background: url(../images/bg-page.jpg) no-repeat center top;
+    height: 900px;
+    width: 1260px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#header {
+    height: 140px;
+}
+
+#header .home {
+    position: absolute;
+    top: 30px;
+    left: 352px;
+    display: block;
+    width: 720px;
+    height: 70px;
+    text-indent: -9000px;
+}
+
+#languages {
+    float: right;
+    padding-top: 5px;
+    padding-right: 100px;
+}
+
+#content {
+    position: relative;
+}
+
+#footer h5 {
+    color: #666;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#footer ul ul {
+    margin-left: 20px;
+}
+
+#footer a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+#footer a:hover {
+    color: #41455b;
+}
+
+#footer {
+    width: 960px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+#copyright {
+    font-weight: bold;
+    text-align: center;
+    color: #777;
+    padding-top: 10px;
+}
+
+#menu ul li a {
+    text-indent: -9999px;
+    position: absolute;
+    display: block;
+    z-index: 1;
+}
+
+#menu ul ul {
+    display: none;
+}
+
+#menu ul li.moi-london-incognito a,
+#menu ul li.me-london-incognito a {
+    width: 282px;
+    height: 35px;
+    background: url(../images/menu/moi-london-incognito.png) no-repeat left top;
+    top: 110px;
+    left: 150px;
+}
+
+#menu ul li.me-london-incognito a {
+    width: 278px;
+    background: url(../images/menu/me-london-incognito.png) no-repeat left top;
+}
+
+#menu ul li.pourquoi-london-incognito a,
+#menu ul li.why-london-incognito a {
+    width: 362px;
+    height: 40px;
+    background: url(../images/menu/pourquoi-london-incognito.png) no-repeat left top;
+    top: 66px;
+    left: 250px;
+}
+
+#menu ul li.why-london-incognito a {
+    width: 312px;
+    background: url(../images/menu/why-london-incognito.png) no-repeat left top;
+    left: 280px;
+}
+
+#menu ul li.formules a,
+#menu ul li.packages a {
+    width: 102px;
+    height: 24px;
+    background: url(../images/menu/formules.png) no-repeat left top;
+    top: 120px;
+    left: 540px;
+}
+
+#menu ul li.packages a {
+    width: 108px;
+    background: url(../images/menu/packages.png) no-repeat left top;
+}
+
+#menu ul li.journees-a-theme a {
+    width: 340px;
+    height: 34px;
+    background: #fff url(../images/menu/journees-a-theme.png) no-repeat left top;
+    top: 144px;
+    left: 540px;
+}
+
+#menu ul li.themed-day-trip a {
+    width: 346px;
+    height: 40px;
+    background: #fff url(../images/menu/themed-day-trip.png) no-repeat left top;
+    top: 144px;
+    left: 540px;
+}
+
+#menu ul li.journees-a-la-carte a {
+    width: 340px;
+    height: 34px;
+    background: #fff url(../images/menu/journees-a-la-carte.png) no-repeat left top;
+    top: 178px;
+    left: 540px;
+}
+
+#menu ul li.a-la-carte-day-trip a {
+    width: 346px;
+    height: 42px;
+    background: #fff url(../images/menu/a-la-carte-day-trip.png) no-repeat left top;
+    top: 184px;
+    left: 540px;
+}
+
+#menu ul li.idee-cadeau a {
+    width: 340px;
+    height: 30px;
+    background: #fff url(../images/menu/idee-cadeau.png) no-repeat left top;
+    top: 212px;
+    left: 540px;
+}
+
+#menu ul li.gift-idea a {
+    width: 346px;
+    height: 34px;
+    background: #fff url(../images/menu/gift-idea.png) no-repeat left top;
+    top: 226px;
+    left: 540px;
+}
+
+#menu ul li.reservation-hebergement a {
+    width: 340px;
+    height: 34px;
+    background: #fff url(../images/menu/reservation-hebergement.png) no-repeat left top;
+    top: 242px;
+    left: 540px;
+}
+
+#menu ul li.accomodation-bookings a {
+    width: 346px;
+    height: 34px;
+    background: #fff url(../images/menu/accomodation-bookings.png) no-repeat left top;
+    top: 260px;
+    left: 540px;
+}
+
+#menu ul li.espace-presse a,
+#menu ul li.press a {
+    width: 170px;
+    height: 34px;
+    background: url(../images/menu/espace-presse.png) no-repeat left top;
+    top: 110px;
+    left: 760px;
+}
+
+#menu ul li.press a {
+    width: 78px;
+    height: 26px;
+    background: url(../images/menu/press.png) no-repeat left top;
+    top: 114px;
+    left: 790px;
+}
+
+#menu ul li.partenaires a,
+#menu ul li.partners a {
+    width: 140px;
+    height: 30px;
+    background: url(../images/menu/partenaires.png) no-repeat left top;
+    top: 66px;
+    left: 680px;
+}
+
+#menu ul li.partners a {
+    width: 108px;
+    background: url(../images/menu/partners.png) no-repeat left top;
+    left: 690px;
+}
+
+#menu ul li.acces a,
+#menu ul li.getting-here a {
+    width: 96px;
+    height: 40px;
+    background: url(../images/menu/acces.png) no-repeat left top;
+    top: 68px;
+    left: 900px;
+}
+
+#menu ul li.getting-here a {
+    width: 178px;
+    background: url(../images/menu/getting-here.png) no-repeat left top;
+    left: 840px;
+}
+
+#menu ul li.contact-fr a,
+#menu ul li.contact-en a {
+    width: 120px;
+    height: 48px;
+    background: url(../images/menu/contact.png) no-repeat left top;
+    top: 110px;
+    left: 988px;
+}
+
+#menu ul li a:hover,
+#menu ul li.selected a {
+    background-position: left bottom;
+}
+
+#folder {
+    color: #444;
+    position: absolute;
+    top: 164px;
+    left: 218px;
+    width: 800px;
+    height: 542px;
+    border: 1px dashed #666666;
+}
+
+#folder .notice {
+    font-size:.8em;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+#folder.theme {
+    left: 134px;
+}
+
+#folder .right {
+    position: absolute;
+    top: 0;
+    right: -212px;
+    width: 200px;
+}
+
+/* Liste des autres thèmes disponibles */
+#folder .themes li {
+    padding-bottom: 2px;
+}
+
+#folder .themes li.selected {
+    list-style-type: circle;
+    list-style-position: inside;
+}
+
+#folder .themes li.selected a {
+    text-decoration: none;
+    color: #993366;
+    font-weight: bold;
+}
+
+#folder .themes a {
+    font-style: italic;
+}
+/* FIN */
+
+/* Liste des images d'un thème */
+#folder .images table {
+    width: 100%;
+}
+
+#folder .images td {
+    padding: 1px;
+    text-align: center;
+}
+
+#folder .images img {
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+/* FIN */
+
+#folder h1 {
+    font-weight: bold;
+    margin: 10px 0;
+    color: #ff1493;
+    font-style: italic;
+}
+
+#folder p {
+    margin: 4px 0;
+}
+
+#folder .description {
+    position: absolute;
+    padding: 0 10px;
+}
+
+#folder .description ul {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+#folder .description ul li {
+    list-style-image: url(../images/dash.gif);
+    list-style-position: outside;
+    padding: 2px 0;
+}
+
+/* Formules */
+#folder.formules .children,
+#folder.packages .children {
+    position: absolute;
+    top: 190px;
+    left: 480px;
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+#folder.formules .children li,
+#folder.packages .children li {
+    padding: 4px 0;
+}
+/* FIN */
+
+/* Moi et London Incognito */
+#folder.moi-london-incognito .description,
+#folder.me-london-incognito .description {
+    top: 80px;
+    width: 420px;
+}
+
+/* Pourquoi London Incognito ? */
+#folder.pourquoi-london-incognito ul li,
+#folder.why-london-incognito ul li {
+    position: absolute;
+    text-align: justify;
+    list-style-type: none;
+    list-style-image: none;
+}
+
+#folder.pourquoi-london-incognito li b,
+#folder.why-london-incognito li b {
+    color: #df2939;
+}
+
+#folder li.originalite {
+    top: 338px;
+    left: 238px;
+    width: 280px;
+}
+
+#folder li.choix {
+    top: 330px;
+    left: 538px;
+    width: 250px;
+}
+
+#folder.pourquoi-london-incognito li.choix {
+    top: 360px;
+}
+
+#folder li.tranquilite {
+    top: 100px;
+    left: 240px;
+    width: 230px;
+}
+
+#folder li.gain-temps {
+    top: 230px;
+    left: 500px;
+    width: 260px;
+}
+
+#folder li.rassurance {
+    top: 200px;
+    left: 200px;
+    width: 250px;
+}
+
+#folder li.liberte {
+    top: 310px;
+    left: 10px;
+    width: 200px;
+}
+
+#folder li.assurance {
+    top: 110px;
+    left: 540px;
+    width: 250px;
+}
+
+/* Les formules */
+#folder.journees-a-la-carte .description,
+#folder.a-la-carte-day-trip .description {
+    left: 456px;
+}
+
+#folder.journees-a-theme .description,
+#folder.themed-day-trip .description {
+    top: 80px;
+    left: 370px;
+}
+
+#folder.journees-a-theme ul.children,
+#folder.themed-day-trip ul.children {
+    position: absolute;
+    top: 340px;
+    left: 380px;
+    width: 410px;
+}
+
+#folder.journees-a-theme ul.children li,
+#folder.themed-day-trip ul.children li {
+    float: left;
+    width: 50%;
+    font-size: 1.1em;
+    font-style: italic;
+    padding: 2px 0;
+}
+
+#folder.journees-a-theme ul.children li a,
+#folder.themed-day-trip ul.children li a {
+    margin-right: 10px;
+}
+
+#folder.reservation-hebergement .description,
+#folder.accomodation-bookings .description {
+    top: 350px;
+    left: 160px;
+}
+
+#folder.idee-cadeau .description,
+#folder.gift-idea .description {
+    top: 160px;
+    width: 380px;
+}
+
+#folder.gardez-la-ligne-avant-2012 .description,
+#folder.keep-you-figure-before-2012 .description,
+#folder.vit-comme-une-reine .description,
+#folder.live-like-a-queen .description {
+    top: 30px;
+    left: 450px;
+}
+
+#folder.londres-du-passe .description,
+#folder.london-back-in-time .description {
+    left: 450px;
+}
+
+#folder.les-amoureux-de-londres .description,
+#folder.london-lovers .description {
+    top: 10px;
+    left: 210px;
+}
+
+#folder.les-amoureux-de-londres .description .notice,
+#folder.london-lovers .description .notice {
+    position: absolute;
+    top: 250px;
+    left: 50px;
+    width: 245px;
+    margin: 0;
+}
+
+#folder.londres-scene-de-crime .description,
+#folder.london-crime-scene .description {
+    left: 465px;
+}
+
+#folder.londonien-d-un-jour .description,
+#folder.londoner-for-a-day .description {
+    top: 80px;
+    width: 400px;
+}
+
+#folder.londres-les-pieds-dans-l-eau .description,
+#folder.london-by-the-waterside .description {
+    top: 50px;
+    left: 470px;
+}
+
+#folder.londres-pour-les-enfants .description,
+#folder.london-for-children .description {
+    left: 240px;
+}
+
+#folder.londres-pour-les-enfants .description .notice,
+#folder.london-for-children .description .notice {
+    position: absolute;
+    top: 380px;
+    left: -226px;
+    width: 430px;
+    margin: 0;
+}
+
+#folder.une-nuit-londonienne-alternative .description,
+#folder.an-alternative-london-night .description {
+    top: 30px;
+    left: 450px;
+}
+
+#folder.londres-vintage .description,
+#folder.vintage-london .description {
+    top: 136px;
+    left: 0;
+    width: 455px;
+}
+
+/* Londres Rock'n'punk */
+#folder.londres-rock-n-punk .description,
+#folder.rock-n-punk-london .description {
+    width: 370px;
+}
+
+/* Espace presse */
+#folder.espace-presse .description,
+#folder.press .description {
+    top: 220px;
+    width: 400px;
+}
+
+/* Partenaires */
+#folder.partenaires .description,
+#folder.partners .description {
+    top: 178px;
+    width: 505px;
+}
+
+/* Un artiste à Londres */
+#folder.un-artiste-a-londres .description,
+#folder.an-artist-in-london .description {
+    width: 410px;
+}
+
+.pdf-presentation {
+    padding: 5px 0;
+}
+    
+.pdf-presentation img,
+.pdf-presentation a,
+.pdf-cgv img,
+.pdf-cgv a {
+    vertical-align: middle;
+}
+
+.clear { clear: both; }
+.text-left {text-align: left; }
+.text-right {text-align: right; }
+.text-center {text-align: center; }
+.text-justify {text-align: justify; }
+.red {color: red;}
+.purple {color: #993366;}
+
+/* SLIMBOX2 */
+
+#lbOverlay {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    cursor: pointer;
+}
+
+#lbCenter, #lbBottomContainer {
+    position: absolute;
+    z-index: 9999;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.lbLoading {
+    background: #fff url(../images/slimbox2/loading.gif) no-repeat center;
+}
+
+#lbImage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 10px solid #fff;
+    background-repeat: no-repeat;
+}
+
+#lbPrevLink, #lbNextLink {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    outline: none;
+}
+
+#lbPrevLink {
+    left: 0;
+}
+
+#lbPrevLink:hover {
+    background: transparent url(../images/slimbox2/prevlabel.gif) no-repeat 0 15%;
+}
+
+#lbNextLink {
+    right: 0;
+}
+
+#lbNextLink:hover {
+    background: transparent url(../images/slimbox2/nextlabel.gif) no-repeat 100% 15%;
+}
+
+#lbBottom {
+    font-family: Verdana, Arial, Geneva, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #666;
+    line-height: 1.4em;
+    text-align: left;
+    border: 10px solid #fff;
+    border-top-style: none;
+}
+
+#lbCloseLink {
+    display: block;
+    float: right;
+    width: 66px;
+    height: 22px;
+    background: transparent url(../images/slimbox2/closelabel.gif) no-repeat center;
+    margin: 5px 0;
+    outline: none;
+}
+
+#lbCaption, #lbNumber {
+    margin-right: 71px;
+}
+
+#lbCaption {
+    font-weight: bold;
+}
+
