@@ -20,7 +20,7 @@
 
 	<property file="build.${user.name}.properties" />
 
-	<target name="local-undeploy">
+	<target name="local-undeploy" description="">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -101,7 +101,7 @@
 	</target>
 
 
-	<target name="local-bbdd-backup">
+	<target name="local-bbdd-backup" description="">
 		<exec executable="${scripts.mysqldump}">
 			<arg value="${local.bbdd.name}" />
 			<arg value="${local.bbdd.backupFile.path}" />
@@ -111,12 +111,13 @@
 
 	</target>
 
-	<target name="local-bbdd-replace-backup">
+	<target name="local-bbdd-replace-backup" description="">
 		<move tofile="${local.bbdd.deployFile.path}"
 		      file="${local.bbdd.backupFile.path}" />
 
 	</target>
-	<target name="local-bbdd-deploy">
+	
+	<target name="local-bbdd-deploy" description="">
 
 		<sql driver="${local.bbdd.driver}"
 		     url="${local.bbdd.url}"
@@ -128,7 +129,7 @@
 	</target>
 
 
-	<target name="remote-undeploy">
+	<target name="remote-undeploy" description="">
 
 		<ftp action="del"
 		     server="${deploy.ftp.url}"
@@ -155,7 +156,7 @@
 
 	</target>
 
-	<target name="remote-create-folder">
+	<target name="remote-create-folder" description="">
 
 		<ftp action="mkdir"
 		     server="${deploy.ftp.url}"
@@ -285,7 +286,7 @@
 		</scp>
 	</target>
 
-	<target name="remote-deploy-bbdd">
+	<target name="remote-deploy-bbdd" description="">
 
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
@@ -309,34 +310,16 @@
 	</target>
 	<!--Preproduction task-->
 
-	<target name="preproduction-undeploy">
+	<target name="preproduction-undeploy" description="">
 
-		<ftp action="del"
-		     server="${prepoduction.ftp.url}"
-		     userid="${prepoduction.ftp.user}"
-		     password="${prepoduction.ftp.password}"
-		     remotedir="${prepoduction.ftp.remote.dir}"
-		     verbose="true">
-			<fileset>
-				<include name="**/*.*" />
-			</fileset>
-		</ftp>
-
-		<ftp action="rmdir"
-		     server="${prepoduction.ftp.url}"
-		     userid="${prepoduction.ftp.user}"
-		     password="${prepoduction.ftp.password}"
-		     remotedir="${prepoduction.ftp.root.dir}"
-		     verbose="true">
-			<fileset>
-				<include name="${prepoduction.ftp.remote.folder}/**/*" />
-				<include name="${prepoduction.ftp.remote.folder}" />
-			</fileset>
-		</ftp>
+		<sshexec host="${preproduction.ftp.url}"
+				         username="${preproduction.ftp.user}"
+				         password="${preproduction.ftp.password}"
+				         command="rm -rf ${preproduction.ftp.remote.dir}" />
 
 	</target>
 
-	<target name="preproduction-create-folder">
+	<target name="-preproduction-create-folder">
 
 		<sshexec host="${preproduction.ftp.url}"
 		         username="${preproduction.ftp.user}"
@@ -345,12 +328,12 @@
 
 	</target>
 
-	<target name="preproduction-deploy-clean"
-	        depends="preproduction-undeploy,preproduction-create-folder,preproduction-deploy"
+	<target name="preproduction-deploy"
+	        depends="preproduction-undeploy,-preproduction-create-folder,-preproduction-deploy"
 	        description="">
 	</target>
 
-	<target name="preproduction-deploy" depends="" description="">
+	<target name="-preproduction-deploy" depends="" >
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -379,11 +362,16 @@
 		</scp>
 
 		<scp todir="${preproduction.ftp.user}:${preproduction.ftp.password}@${preproduction.ftp.url}:${preproduction.ftp.remote.dir}/sites/default">
-			<fileset file="${sites.dir}/default/settings.php">
-				<include name="settings.remote.php" />
+			<fileset file="${sites.dir}/default/settings.preproduction.php">
+				<include name="" />
 				<exclude />
 			</fileset>
 		</scp>
+		
+		<sshexec host="${preproduction.ftp.url}"
+				         username="${preproduction.ftp.user}"
+				         password="${preproduction.ftp.password}"
+				         command="mv ${preproduction.ftp.remote.dir}/sites/default/settings.preproduction.php ${preproduction.ftp.remote.dir}/sites/default/settings.php" />
 
 		<sshexec host="${preproduction.ftp.url}"
 		         username="${preproduction.ftp.user}"
@@ -411,7 +399,7 @@
 
 	</target>
 
-	<target name="preproduction-deploy-bbdd">
+	<target name="preproduction-deploy-bbdd" description="">
 
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
@@ -434,6 +422,5 @@
 		</sql>
 
 	</target>
-
 
 </project>

@@ -89,7 +89,7 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysqli://root@mysql.mnemea.com/bd937465';
+$db_url = 'mysqli://london:london12@localhost:3306/londonIncognito';
 $db_prefix = '';
 
 /**
