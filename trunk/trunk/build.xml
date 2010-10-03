@@ -111,12 +111,11 @@
 
 	</target>
 
-	<target name="local-bbdd-replace-backup" description="">
+	<target name="bbdd-replace-backup" description="">
 		<move tofile="${local.bbdd.deployFile.path}"
 		      file="${local.bbdd.backupFile.path}" />
-
 	</target>
-	
+
 	<target name="local-bbdd-deploy" description="">
 
 		<sql driver="${local.bbdd.driver}"
@@ -156,7 +155,7 @@
 
 	</target>
 
-	<target name="remote-create-folder" description="">
+	<target name="remote-create-folder">
 
 		<ftp action="mkdir"
 		     server="${deploy.ftp.url}"
@@ -308,14 +307,16 @@
 		</sql>
 
 	</target>
+
+
 	<!--Preproduction task-->
 
 	<target name="preproduction-undeploy" description="">
 
 		<sshexec host="${preproduction.ftp.url}"
-				         username="${preproduction.ftp.user}"
-				         password="${preproduction.ftp.password}"
-				         command="rm -rf ${preproduction.ftp.remote.dir}" />
+		         username="${preproduction.ftp.user}"
+		         password="${preproduction.ftp.password}"
+		         command="rm -rf ${preproduction.ftp.remote.dir}" />
 
 	</target>
 
@@ -333,7 +334,7 @@
 	        description="">
 	</target>
 
-	<target name="-preproduction-deploy" depends="" >
+	<target name="-preproduction-deploy" depends="">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -367,11 +368,11 @@
 				<exclude />
 			</fileset>
 		</scp>
-		
+
 		<sshexec host="${preproduction.ftp.url}"
-				         username="${preproduction.ftp.user}"
-				         password="${preproduction.ftp.password}"
-				         command="mv ${preproduction.ftp.remote.dir}/sites/default/settings.preproduction.php ${preproduction.ftp.remote.dir}/sites/default/settings.php" />
+		         username="${preproduction.ftp.user}"
+		         password="${preproduction.ftp.password}"
+		         command="mv ${preproduction.ftp.remote.dir}/sites/default/settings.preproduction.php ${preproduction.ftp.remote.dir}/sites/default/settings.php" />
 
 		<sshexec host="${preproduction.ftp.url}"
 		         username="${preproduction.ftp.user}"
@@ -420,6 +421,18 @@
 		     password="${preproduction.bbdd.password}">
 			<transaction src="${preproduction.bbdd.deployFile.path}" />
 		</sql>
+
+	</target>
+
+	<target name="preproduction-bbdd-backup" description="">
+		<sshexec host="${preproduction.ftp.url}"
+		         username="${preproduction.ftp.user}"
+		         password="${preproduction.ftp.password}"
+		         command="mysqldump --add-drop-database -u ${preproduction.bbdd.user} --password=${preproduction.bbdd.password} ${preproduction.bbdd.name} > /tmp/${backup.sql.name}">
+		</sshexec>
+
+		<scp todir="${local.bbdd.backupFile.path}"
+		     file="${preproduction.ftp.user}:${preproduction.ftp.password}@${preproduction.ftp.url}:/tmp/${backup.sql.name}" />
 
 	</target>
 
