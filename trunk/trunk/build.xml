@@ -332,6 +332,11 @@
 	<target name="preproduction-deploy"
 	        depends="preproduction-undeploy,-preproduction-create-folder,-preproduction-deploy"
 	        description="">
+		<sshexec host="${preproduction.ftp.url}"
+				         username="${preproduction.ftp.user}"
+				         password="${preproduction.ftp.password}"
+				         command="chown -R :www-data ${preproduction.ftp.remote.dir};
+											chmod -R 774 ${preproduction.ftp.remote.dir}/sites/default/files" />
 	</target>
 
 	<target name="-preproduction-deploy" depends="">
