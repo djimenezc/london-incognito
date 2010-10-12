@@ -130,28 +130,10 @@
 
 	<target name="remote-undeploy" description="">
 
-		<ftp action="del"
-		     server="${deploy.ftp.url}"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     remotedir="${deploy.ftp.remote.dir}"
-		     verbose="true">
-			<fileset>
-				<include name="**/*.*" />
-			</fileset>
-		</ftp>
-
-		<ftp action="rmdir"
-		     server="${deploy.ftp.url}"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     remotedir="${deploy.ftp.root.dir}"
-		     verbose="true">
-			<fileset>
-				<include name="${deploy.ftp.remote.folder}/**/*" />
-				<include name="${deploy.ftp.remote.folder}" />
-			</fileset>
-		</ftp>
+		<sshexec host="${deploy.ftp.url}"
+		         username="${deploy.ftp.user}"
+		         password="${deploy.ftp.password}"
+		         command="rm -r /kunden/homepages/46/d339361055/htdocs/london-incognito;" />
 
 	</target>
 
@@ -167,11 +149,11 @@
 	</target>
 
 	<target name="remote-deploy-clean"
-	        depends="remote-undeploy,remote-create-folder,remote-deploy"
+	        depends="remote-folder-backup,remote-undeploy,remote-create-folder,remote-deploy"
 	        description="">
 	</target>
 
-	<target name="remote-deploy" depends="remote-folder-backup" description="">
+	<target name="remote-deploy" depends="" description="">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -184,118 +166,91 @@
      ------------------------------------------
 		</echo>
 
-		
-		
-		<ftp server="${deploy.ftp.url}"
-		     remotedir="${deploy.ftp.remote.dir}"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     depends="yes"
-		     verbose="true">
+		<delete dir="/tmp/london-incognito">
+		</delete>
+		<mkdir dir="/tmp/london-incognito" />
+
+		<copy todir="/tmp/london-incognito">
 			<fileset dir="${drupal.dir}">
 				<include name="**/*.*" />
 				<exclude name=".svn" />
 			</fileset>
-		</ftp>
+		</copy>
 
-		<ftp server="${deploy.ftp.url}"
-		     remotedir="${deploy.ftp.remote.dir}/sites"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     depends="yes"
-		     verbose="true">
+		<copy todir="/tmp/london-incognito/sites">
 			<fileset dir="${sites.dir}">
 				<include name="**/*.*" />
 				<exclude name=".svn" />
 				<exclude name="**/*.php" />
 			</fileset>
-		</ftp>
+		</copy>
 
-		<ftp server="${deploy.ftp.url}"
-		     remotedir="${deploy.ftp.remote.dir}/sites/default"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     depends="yes"
-		     verbose="true">
+		<copy todir="/tmp/london-incognito/sites/default">
 			<fileset file="${sites.dir}/default/settings.php">
 				<include name="settings.remote.php" />
 				<exclude />
 			</fileset>
-		</ftp>
+		</copy>
 
-		<ftp action="mkdir"
-		     server="${deploy.ftp.url}"
-		     remotedir="${deploy.ftp.remote.dir}/sites/all/modules"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     depends="yes"
-		     verbose="true">
+		<rename dest="/tmp/london-incognito/sites/default/settings.php"
+		        src="/tmp/london-incognito/sites/default/settings.remote.php" />
 
-		</ftp>
+		<mkdir dir="/tmp/london-incognito/sites/all/modules" />
 
-		<ftp server="${deploy.ftp.url}"
-		     remotedir="${deploy.ftp.remote.dir}/sites/all/modules"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     depends="yes"
-		     verbose="true">
+		<copy todir="/tmp/london-incognito/sites/all/modules">
 			<fileset dir="${modules.dir}">
 				<include name="**/*.*" />
 				<exclude name=".svn" />
 			</fileset>
-		</ftp>
+		</copy>
 
-		<ftp action="mkdir"
-		     server="${deploy.ftp.url}"
-		     remotedir="${deploy.ftp.remote.dir}/sites/all/themes"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     depends="yes"
-		     verbose="true">
+		<mkdir dir="/tmp/london-incognito/sites/all/themes" />
 
-		</ftp>
-
-		<ftp server="${deploy.ftp.url}"
-		     remotedir="${deploy.ftp.remote.dir}/sites/all/themes"
-		     userid="${deploy.ftp.user}"
-		     password="${deploy.ftp.password}"
-		     depends="yes"
-		     verbose="true">
+		<copy todir="/tmp/london-incognito/sites/all/themes">
 			<fileset dir="${themes.dir}">
 				<include name="**/*.*" />
 				<exclude name=".svn" />
 			</fileset>
+		</copy>
+
+		<tar destfile="/tmp/london-incognito.tar.gz" compression="gzip">
+			<fileset dir="/tmp" id="id">
+				<include name="london-incognito/**/*.*" />
+				<exclude name="" />
+			</fileset>
+		</tar>
+		
+		<ftp action="mkdir"
+		     server="${deploy.ftp.url}"
+		     userid="${deploy.ftp.user}"
+		     password="${deploy.ftp.password}"
+		     remotedir="/london-incognito-deploy"
+		     verbose="true">
 		</ftp>
+
+		<scp todir="${deploy.ftp.user}@${deploy.ftp.url}:/kunden/homepages/46/d339361055/htdocs"
+		     password="${deploy.ftp.password}"
+		     verbose="true">
+			<fileset dir="/tmp">
+				<include name="london-incognito.tar.gz" />
+				<exclude name="" />
+			</fileset>
+		</scp>
+
+		<sshexec host="${deploy.ftp.url}"
+		         username="${deploy.ftp.user}"
+		         password="${deploy.ftp.password}"
+		         command="rm -r /kunden/homepages/46/d339361055/htdocs/london-incognito;
+									tar xfzv london-incognito.tar.gz " />
+
 	</target>
 
 	<target name="remote-folder-backup" description="">
-		<sshexec host="${deploy.ftp.url}" username="${deploy.ftp.user}"
-					password="${deploy.ftp.password}"
-					command="rm -r ${remote-folder-backup};
-					cp -r ${remote-folder-deploy} ${remote-folder-backup} "/>
-	</target>
-	
-	<target name="remote-local-deploy" depends="remote-folder-backup" description="">
-		<tstamp>
-			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
-		</tstamp>
-
-		<echo>
-	     ------------------------------------------
-	      Generating remote deployment : ${start.timestamp}
-		  Src dir= ${src.dir}
-		  Deploy dir= ${deploy.ftp.remote.dir}
-	     ------------------------------------------
-			</echo>
-		
-		<sshexec host="${deploy.ftp.url}" username="${deploy.ftp.user}"
-							password="${deploy.ftp.password}"
-							command="rm -r ${remote-folder-deploy}"/>
-		
-		<scp file="/var/www/london-incognito"
-		     todir="${deploy.ftp.user}@${deploy.ftp.url}:/kunden/homepages/46/d339361055/htdocs/london-incognito"
-		     password="${deploy.ftp.password}">
-		</scp>
+		<sshexec host="${deploy.ftp.url}"
+		         username="${deploy.ftp.user}"
+		         password="${deploy.ftp.password}"
+		         command="rm -r ${remote-folder-backup};
+					cp -r ${remote-folder-deploy} ${remote-folder-backup} " />
 	</target>
 
 	<target name="remote-deploy-bbdd" description="">
@@ -346,9 +301,9 @@
 	        depends="preproduction-undeploy,-preproduction-create-folder,-preproduction-deploy"
 	        description="">
 		<sshexec host="${preproduction.ftp.url}"
-				         username="${preproduction.ftp.user}"
-				         password="${preproduction.ftp.password}"
-				         command="chown -R :www-data ${preproduction.ftp.remote.dir};
+		         username="${preproduction.ftp.user}"
+		         password="${preproduction.ftp.password}"
+		         command="chown -R :www-data ${preproduction.ftp.remote.dir};
 											chmod -R 774 ${preproduction.ftp.remote.dir}/sites/default/files" />
 	</target>
 
