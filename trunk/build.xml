@@ -171,7 +171,7 @@
 	        description="">
 	</target>
 
-	<target name="remote-deploy" depends="" description="">
+	<target name="remote-deploy" depends="remote-folder-backup" description="">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -184,6 +184,8 @@
      ------------------------------------------
 		</echo>
 
+		
+		
 		<ftp server="${deploy.ftp.url}"
 		     remotedir="${deploy.ftp.remote.dir}"
 		     userid="${deploy.ftp.user}"
@@ -266,7 +268,14 @@
 		</ftp>
 	</target>
 
-	<target name="remote-quick-deploy" depends="" description="">
+	<target name="remote-folder-backup" description="">
+		<sshexec host="${deploy.ftp.url}" username="${deploy.ftp.user}"
+					password="${deploy.ftp.password}"
+					command="rm -r ${remote-folder-backup};
+					cp -r ${remote-folder-deploy} ${remote-folder-backup} "/>
+	</target>
+	
+	<target name="remote-local-deploy" depends="remote-folder-backup" description="">
 		<tstamp>
 			<format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
 		</tstamp>
@@ -278,7 +287,11 @@
 		  Deploy dir= ${deploy.ftp.remote.dir}
 	     ------------------------------------------
 			</echo>
-
+		
+		<sshexec host="${deploy.ftp.url}" username="${deploy.ftp.user}"
+							password="${deploy.ftp.password}"
+							command="rm -r ${remote-folder-deploy}"/>
+		
 		<scp file="/var/www/london-incognito"
 		     todir="${deploy.ftp.user}@${deploy.ftp.url}:/kunden/homepages/46/d339361055/htdocs/london-incognito"
 		     password="${deploy.ftp.password}">
