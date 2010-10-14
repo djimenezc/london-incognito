@@ -219,7 +219,7 @@
 				<exclude name="" />
 			</fileset>
 		</tar>
-		
+
 		<ftp action="mkdir"
 		     server="${deploy.ftp.url}"
 		     userid="${deploy.ftp.user}"
@@ -388,12 +388,21 @@
 		  Password: ${preproduction.bbdd.password}
 	     ------------------------------------------
 			</echo>
-		<sql driver="${preproduction.bbdd.driver}"
+
+		<scp todir="${preproduction.ftp.user}:${preproduction.ftp.password}@${preproduction.ftp.url}:/tmp/${preproduction.ftp.remote.folder}.sql"
+		     file="${preproduction.bbdd.deployFile.path}" />
+
+		<sshexec host="${preproduction.ftp.url}"
+		         username="${preproduction.ftp.user}"
+		         password="${preproduction.ftp.password}"
+		         command="cat /tmp/${preproduction.ftp.remote.folder}.sql | mysql -u ${preproduction.bbdd.user}  --password=${preproduction.bbdd.password} ${preproduction.bbdd.name} " />
+
+		<!--<sql driver="${preproduction.bbdd.driver}"
 		     url="${preproduction.bbdd.url}"
 		     userid="${preproduction.bbdd.user}"
 		     password="${preproduction.bbdd.password}">
 			<transaction src="${preproduction.bbdd.deployFile.path}" />
-		</sql>
+		</sql>-->
 
 	</target>
 
